@@ -11,22 +11,13 @@ import {
 } from "react-native";
 import { Colors } from "../constants/colors";
 import { attractions } from "../data/attractions";
-
-interface Attraction {
-  id: string;
-  name: string;
-  category: string;
-  description: string;
-  image: any;
-  latitude: number;
-  longitude: number;
-  location: string;
-  rating: number;
-}
+import { Attraction } from "../types/Attraction";
 
 export default function FavoritesScreen() {
   const router = useRouter();
-  const [favoriteAttractions, setFavoriteAttractions] = useState<any[]>([]);
+  const [favoriteAttractions, setFavoriteAttractions] = useState<Attraction[]>(
+    [],
+  );
 
   useFocusEffect(
     useCallback(() => {
@@ -39,7 +30,9 @@ export default function FavoritesScreen() {
       const saved = await AsyncStorage.getItem("favorites");
       if (saved) {
         const favIds = JSON.parse(saved);
-        const favList = attractions.filter((a) => favIds.includes(a.id));
+        const favList: Attraction[] = attractions.filter((a) =>
+          favIds.includes(a.id),
+        );
         setFavoriteAttractions(favList);
       } else {
         setFavoriteAttractions([]);
