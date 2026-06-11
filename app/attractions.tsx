@@ -137,7 +137,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 12,
     backgroundColor: Colors.white,
+    minHeight: 60,
     maxHeight: 60,
+    flexGrow: 0,
+    flexShrink: 0,
   },
   filterBtn: {
     paddingHorizontal: 16,
