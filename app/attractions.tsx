@@ -87,7 +87,14 @@ export default function AttractionsScreen() {
               router.push({ pathname: "/details", params: { id: item.id } })
             }
           >
-            <Image source={{ uri: item.image }} style={styles.cardImage} />
+            <Image
+              source={
+                typeof item.image === "string"
+                  ? { uri: item.image }
+                  : item.image
+              }
+              style={styles.cardImage}
+            />
             <View style={styles.cardContent}>
               <View style={styles.cardHeader}>
                 <Text style={styles.cardName}>{item.name}</Text>
