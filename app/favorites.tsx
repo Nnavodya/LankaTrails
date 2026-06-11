@@ -12,6 +12,18 @@ import {
 import { Colors } from "../constants/colors";
 import { attractions } from "../data/attractions";
 
+interface Attraction {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  image: any;
+  latitude: number;
+  longitude: number;
+  location: string;
+  rating: number;
+}
+
 export default function FavoritesScreen() {
   const router = useRouter();
   const [favoriteAttractions, setFavoriteAttractions] = useState<any[]>([]);
