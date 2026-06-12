@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import Footer from "../components/Footer";
 import { Colors } from "../constants/colors";
-
 export default function HomeScreen() {
   const router = useRouter();
 
@@ -65,6 +65,7 @@ export default function HomeScreen() {
       >
         <Text style={styles.favBtnText}>❤️ My Favorites</Text>
       </TouchableOpacity>
+      <Footer />
     </ScrollView>
   );
 }
