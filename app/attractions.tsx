@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   FlatList,
@@ -18,6 +18,13 @@ const CATEGORIES = ["All", "Historical", "Nature", "Hotels"];
 export default function AttractionsScreen() {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const { category } = useLocalSearchParams();
+
+  useEffect(() => {
+    if (category) {
+      setSelectedCategory(category as string);
+    }
+  }, [category]);
   const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
