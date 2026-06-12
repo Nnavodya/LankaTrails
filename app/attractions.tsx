@@ -7,8 +7,9 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { Colors } from "../constants/colors";
 import { attractions } from "../data/attractions";
@@ -26,6 +27,7 @@ export default function AttractionsScreen() {
       setSelectedCategory(category as string);
     }
   }, [category]);
+
   const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
@@ -41,10 +43,14 @@ export default function AttractionsScreen() {
     }
   };
 
-  const filteredAttractions =
-    selectedCategory === "All"
-      ? attractions
-      : attractions.filter((a) => a.category === selectedCategory);
+  const filteredAttractions = attractions.filter((a) => {
+    const matchCategory =
+      selectedCategory === "All" || a.category === selectedCategory;
+    const matchSearch =
+      a.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      a.location.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchCategory && matchSearch;
+  });
 
   return (
     <View style={styles.container}>
@@ -82,6 +88,17 @@ export default function AttractionsScreen() {
           </TouchableOpacity>
         ))}
       </ScrollView>
+
+      {/* Search Bar */}
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search attractions..."
+          placeholderTextColor={Colors.gray}
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
+      </View>
 
       {/* Attractions List */}
       <FlatList
@@ -173,6 +190,23 @@ const styles = StyleSheet.create({
   },
   filterTextActive: {
     color: Colors.white,
+  },
+  searchContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    backgroundColor: Colors.white,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.lightGray,
+  },
+  searchInput: {
+    backgroundColor: Colors.background,
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    fontSize: 14,
+    color: Colors.dark,
+    borderWidth: 1,
+    borderColor: Colors.lightGray,
   },
   listContainer: {
     padding: 16,
