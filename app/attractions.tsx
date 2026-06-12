@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import { Colors } from "../constants/colors";
 import { attractions } from "../data/attractions";
@@ -18,6 +18,7 @@ const CATEGORIES = ["All", "Historical", "Nature", "Hotels"];
 export default function AttractionsScreen() {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
   const { category } = useLocalSearchParams();
 
   useEffect(() => {
