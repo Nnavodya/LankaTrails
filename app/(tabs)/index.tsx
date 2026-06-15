@@ -1,5 +1,7 @@
 import { useRouter } from "expo-router";
 import {
+  FlatList,
+  Image,
   ScrollView,
   StyleSheet,
   Text,
@@ -8,6 +10,9 @@ import {
 } from "react-native";
 import Footer from "../../components/Footer";
 import { Colors } from "../../constants/colors";
+import { attractions } from "../../data/attractions";
+
+const featuredAttractions = attractions.slice(0, 4);
 export default function HomeScreen() {
   const router = useRouter();
 
@@ -62,6 +67,40 @@ export default function HomeScreen() {
           <Text style={styles.categoryText}>Hotels</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Featured Attractions */}
+      <Text style={styles.sectionTitle}>🔥 Popular Attractions</Text>
+      <FlatList
+        data={featuredAttractions}
+        keyExtractor={(item) => item.id}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.featuredList}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.featuredCard}
+            onPress={() =>
+              router.push({ pathname: "/details", params: { id: item.id } })
+            }
+          >
+            <Image
+              source={
+                typeof item.image === "string"
+                  ? { uri: item.image }
+                  : item.image
+              }
+              style={styles.featuredImage}
+            />
+            <View style={styles.featuredContent}>
+              <Text style={styles.featuredName} numberOfLines={1}>
+                {item.name}
+              </Text>
+              <Text style={styles.featuredLocation}>📍 {item.location}</Text>
+              <Text style={styles.featuredRating}>⭐ {item.rating}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      />
 
       {/* Buttons */}
       <TouchableOpacity
@@ -199,6 +238,46 @@ const styles = StyleSheet.create({
   favBtnText: {
     color: Colors.danger,
     fontSize: 16,
+    fontWeight: "bold",
+  },
+
+  featuredList: {
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+  },
+  featuredCard: {
+    backgroundColor: Colors.white,
+    borderRadius: 12,
+    marginRight: 12,
+    width: 180,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    overflow: "hidden",
+  },
+  featuredImage: {
+    width: "100%",
+    height: 120,
+    backgroundColor: Colors.lightGray,
+  },
+  featuredContent: {
+    padding: 10,
+  },
+  featuredName: {
+    fontSize: 13,
+    fontWeight: "bold",
+    color: Colors.dark,
+    marginBottom: 4,
+  },
+  featuredLocation: {
+    fontSize: 11,
+    color: Colors.gray,
+    marginBottom: 2,
+  },
+  featuredRating: {
+    fontSize: 11,
+    color: Colors.secondary,
     fontWeight: "bold",
   },
 });
