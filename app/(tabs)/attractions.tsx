@@ -11,8 +11,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Colors } from "../constants/colors";
-import { attractions } from "../data/attractions";
+import { Colors } from "../../constants/colors";
+import { attractions } from "../../data/attractions";
 
 const CATEGORIES = ["All", "Historical", "Nature", "Hotels"];
 
