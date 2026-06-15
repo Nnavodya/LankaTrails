@@ -94,7 +94,9 @@ export default function FavoritesScreen() {
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
           <Text style={styles.backText}>← Back</Text>
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>❤️ My Favorites</Text>
+        <Text style={styles.headerTitle}>
+          ❤️ My Favorites ({favoriteAttractions.length})
+        </Text>
       </View>
 
       {favoriteAttractions.length === 0 ? (
