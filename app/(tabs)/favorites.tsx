@@ -104,7 +104,7 @@ export default function FavoritesScreen() {
           <Text style={styles.emptyIcon}>🤍</Text>
           <Text style={styles.emptyTitle}>No Favorites Yet</Text>
           <Text style={styles.emptyDesc}>
-            Explore attractions and tap the heart to save your favorites!
+            Save attractions to access them quickly later.
           </Text>
           <TouchableOpacity
             style={styles.exploreBtn}
