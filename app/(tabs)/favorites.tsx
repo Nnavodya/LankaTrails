@@ -93,9 +93,6 @@ export default function FavoritesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-          <Text style={styles.backText}>← Back</Text>
-        </TouchableOpacity>
         <Text style={styles.headerTitle}>
           ❤️ My Favorites ({favoriteAttractions.length})
         </Text>
@@ -168,8 +165,6 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingBottom: 16,
     paddingHorizontal: 16,
-    flexDirection: "row",
-    alignItems: "center",
   },
   backBtn: { marginRight: 12 },
   backText: { color: Colors.white, fontSize: 16 },
