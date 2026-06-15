@@ -9,9 +9,20 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Colors } from "../constants/colors";
-import { attractions } from "../data/attractions";
-import { Attraction } from "../types/Attraction";
+import { Colors } from "../../constants/colors";
+import { attractions } from "../../data/attractions";
+
+interface Attraction {
+  id: string;
+  name: string;
+  image: any;
+  location: string;
+  category: string;
+  rating: number;
+  description: string;
+  latitude: number;
+  longitude: number;
+}
 
 export default function FavoritesScreen() {
   const router = useRouter();
@@ -30,10 +41,8 @@ export default function FavoritesScreen() {
       const saved = await AsyncStorage.getItem("favorites");
       if (saved) {
         const favIds = JSON.parse(saved);
-        const favList: Attraction[] = attractions.filter((a) =>
-          favIds.includes(a.id),
-        );
-        setFavoriteAttractions(favList);
+        const favList = attractions.filter((a) => favIds.includes(a.id));
+        setFavoriteAttractions(favList as Attraction[]);
       } else {
         setFavoriteAttractions([]);
       }
@@ -56,7 +65,6 @@ export default function FavoritesScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
           <Text style={styles.backText}>← Back</Text>
@@ -122,10 +130,7 @@ export default function FavoritesScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.background,
-  },
+  container: { flex: 1, backgroundColor: Colors.background },
   header: {
     backgroundColor: Colors.tabBar,
     paddingTop: 50,
@@ -134,28 +139,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  backBtn: {
-    marginRight: 12,
-  },
-  backText: {
-    color: Colors.white,
-    fontSize: 16,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: Colors.white,
-  },
+  backBtn: { marginRight: 12 },
+  backText: { color: Colors.white, fontSize: 16 },
+  headerTitle: { fontSize: 20, fontWeight: "bold", color: Colors.white },
   emptyContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     padding: 32,
   },
-  emptyIcon: {
-    fontSize: 64,
-    marginBottom: 16,
-  },
+  emptyIcon: { fontSize: 64, marginBottom: 16 },
   emptyTitle: {
     fontSize: 22,
     fontWeight: "bold",
@@ -176,14 +169,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     elevation: 2,
   },
-  exploreBtnText: {
-    color: Colors.white,
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  listContainer: {
-    padding: 16,
-  },
+  exploreBtnText: { color: Colors.white, fontWeight: "bold", fontSize: 16 },
+  listContainer: { padding: 16 },
   card: {
     backgroundColor: Colors.white,
     borderRadius: 12,
@@ -194,37 +181,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     overflow: "hidden",
   },
-  cardImage: {
-    width: "100%",
-    height: 160,
-    backgroundColor: Colors.lightGray,
-  },
-  cardContent: {
-    padding: 14,
-  },
+  cardImage: { width: "100%", height: 160, backgroundColor: Colors.lightGray },
+  cardContent: { padding: 14 },
   cardHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 4,
   },
-  cardName: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: Colors.dark,
-    flex: 1,
-  },
-  removeBtn: {
-    padding: 4,
-  },
-  removeIcon: {
-    fontSize: 22,
-  },
-  cardLocation: {
-    fontSize: 13,
-    color: Colors.gray,
-    marginBottom: 6,
-  },
+  cardName: { fontSize: 16, fontWeight: "bold", color: Colors.dark, flex: 1 },
+  removeBtn: { padding: 4 },
+  removeIcon: { fontSize: 22 },
+  cardLocation: { fontSize: 13, color: Colors.gray, marginBottom: 6 },
   categoryBadge: {
     backgroundColor: Colors.lightGray,
     paddingHorizontal: 10,
@@ -232,9 +200,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignSelf: "flex-start",
   },
-  categoryBadgeText: {
-    fontSize: 11,
-    color: Colors.dark,
-    fontWeight: "600",
-  },
+  categoryBadgeText: { fontSize: 11, color: Colors.dark, fontWeight: "600" },
 });
