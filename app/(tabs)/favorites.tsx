@@ -51,7 +51,9 @@ export default function FavoritesScreen() {
       const saved = await AsyncStorage.getItem("favorites");
       if (saved) {
         const favIds = JSON.parse(saved);
-        const favList = attractions.filter((a) => favIds.includes(a.id));
+        const favList = attractions
+          .filter((a) => favIds.includes(a.id))
+          .sort((a, b) => a.name.localeCompare(b.name));
         setFavoriteAttractions(favList as Attraction[]);
       } else {
         setFavoriteAttractions([]);
