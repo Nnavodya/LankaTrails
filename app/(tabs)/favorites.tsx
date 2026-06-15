@@ -38,6 +38,13 @@ export default function FavoritesScreen() {
     }, []),
   );
   const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await loadFavorites();
+    setRefreshing(false);
+  };
+
   const loadFavorites = async () => {
     try {
       const saved = await AsyncStorage.getItem("favorites");
