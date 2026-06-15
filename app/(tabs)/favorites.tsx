@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 
 import { Colors } from "../../constants/colors";
@@ -36,7 +36,7 @@ export default function FavoritesScreen() {
       loadFavorites();
     }, []),
   );
-
+  const [refreshing, setRefreshing] = useState(false);
   const loadFavorites = async () => {
     try {
       const saved = await AsyncStorage.getItem("favorites");
