@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   categoryIcon: {
-    fontSize: 28,
+    fontSize: 36,
     marginBottom: 6,
   },
   categoryText: {
