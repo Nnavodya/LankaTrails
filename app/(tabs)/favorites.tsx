@@ -2,13 +2,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import {
+  Alert,
   FlatList,
   Image,
   RefreshControl,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 
 import { Colors } from "../../constants/colors";
@@ -58,6 +59,21 @@ export default function FavoritesScreen() {
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const confirmRemove = (id: string) => {
+    Alert.alert(
+      "Remove Favorite",
+      "Do you want to remove this attraction from favorites?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Remove",
+          style: "destructive",
+          onPress: () => removeFavorite(id),
+        },
+      ],
+    );
   };
 
   const removeFavorite = async (id: string) => {
@@ -122,7 +138,7 @@ export default function FavoritesScreen() {
                 <View style={styles.cardHeader}>
                   <Text style={styles.cardName}>{item.name}</Text>
                   <TouchableOpacity
-                    onPress={() => removeFavorite(item.id)}
+                    onPress={() => confirmRemove(item.id)}
                     style={styles.removeBtn}
                   >
                     <Text style={styles.removeIcon}>❤️</Text>
