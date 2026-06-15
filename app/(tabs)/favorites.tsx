@@ -32,13 +32,13 @@ export default function FavoritesScreen() {
   const [favoriteAttractions, setFavoriteAttractions] = useState<Attraction[]>(
     [],
   );
+  const [refreshing, setRefreshing] = useState(false);
 
   useFocusEffect(
     useCallback(() => {
       loadFavorites();
     }, []),
   );
-  const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -107,7 +107,7 @@ export default function FavoritesScreen() {
           </Text>
           <TouchableOpacity
             style={styles.exploreBtn}
-            onPress={() => router.push("/attractions")}
+            onPress={() => router.push("/attractions" as any)}
           >
             <Text style={styles.exploreBtnText}>Explore Attractions →</Text>
           </TouchableOpacity>
@@ -118,7 +118,7 @@ export default function FavoritesScreen() {
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContainer}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={loadFavorites} />
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
           renderItem={({ item }) => (
             <TouchableOpacity
@@ -166,9 +166,7 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     paddingHorizontal: 16,
   },
-  backBtn: { marginRight: 12 },
-  backText: { color: Colors.white, fontSize: 16 },
-  headerTitle: { fontSize: 20, fontWeight: "bold", color: Colors.white },
+  headerTitle: { fontSize: 22, fontWeight: "bold", color: Colors.white },
   emptyContainer: {
     flex: 1,
     alignItems: "center",
