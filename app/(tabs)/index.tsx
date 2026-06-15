@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import Footer from "../components/Footer";
-import { Colors } from "../constants/colors";
+import Footer from "../../components/Footer";
+import { Colors } from "../../constants/colors";
 export default function HomeScreen() {
   const router = useRouter();
 
@@ -22,10 +22,22 @@ export default function HomeScreen() {
       {/* Welcome Card */}
       <View style={styles.welcomeCard}>
         <Text style={styles.welcomeText}>Welcome to Paradise 🌴</Text>
-        <Text style={styles.welcomeDesc}>
-          Explore the most beautiful destinations in Sri Lanka — from ancient
-          fortresses to lush rainforests.
-        </Text>
+        <View style={styles.statsRow}>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>9+</Text>
+            <Text style={styles.statLabel}>Attractions</Text>
+          </View>
+          <View style={styles.statDivider} />
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>3</Text>
+            <Text style={styles.statLabel}>Categories</Text>
+          </View>
+          <View style={styles.statDivider} />
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>🇱🇰</Text>
+            <Text style={styles.statLabel}>Sri Lanka</Text>
+          </View>
+        </View>
       </View>
 
       {/* Categories */}
@@ -107,10 +119,28 @@ const styles = StyleSheet.create({
     color: Colors.dark,
     marginBottom: 8,
   },
-  welcomeDesc: {
-    fontSize: 14,
+  statsRow: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  statItem: {
+    alignItems: "center",
+  },
+  statNumber: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: Colors.primary,
+  },
+  statLabel: {
+    fontSize: 12,
     color: Colors.gray,
-    lineHeight: 22,
+    marginTop: 2,
+  },
+  statDivider: {
+    width: 1,
+    height: 40,
+    backgroundColor: Colors.lightGray,
   },
   sectionTitle: {
     fontSize: 18,
