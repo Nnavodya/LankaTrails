@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import {
   FlatList,
   Image,
+  RefreshControl,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -92,6 +93,9 @@ export default function FavoritesScreen() {
           data={favoriteAttractions}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContainer}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={loadFavorites} />
+          }
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.card}
