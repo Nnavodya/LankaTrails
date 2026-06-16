@@ -114,7 +114,7 @@ export default function HomeScreen() {
         style={styles.favBtn}
         onPress={() => router.push("/favorites")}
       >
-        <Text style={styles.favBtnText}>❤️ My Favorites</Text>
+        <Text style={styles.favBtnText}>💚 Saved Places</Text>
       </TouchableOpacity>
       <Footer />
     </ScrollView>
