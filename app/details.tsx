@@ -17,6 +17,8 @@ export default function DetailsScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [distance, setDistance] = useState<string | null>(null);
+  const [locationLoading, setLocationLoading] = useState(false);
 
   const attraction = attractions.find((a) => a.id === id);
 
