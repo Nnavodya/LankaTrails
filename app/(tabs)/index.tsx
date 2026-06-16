@@ -123,7 +123,7 @@ export default function HomeScreen() {
       {/* Buttons */}
       <TouchableOpacity
         style={styles.exploreBtn}
-        onPress={() => router.push("/attractions")}
+        onPress={() => router.push("/attractions" as any)}
       >
         <Text style={styles.exploreBtnText}>Explore All Attractions →</Text>
       </TouchableOpacity>
