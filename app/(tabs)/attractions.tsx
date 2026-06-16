@@ -19,6 +19,9 @@ const CATEGORIES = ["All", "Historical", "Nature", "Hotels"];
 export default function AttractionsScreen() {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [imageLoading, setImageLoading] = useState<{ [key: string]: boolean }>(
+    {},
+  );
   const [searchQuery, setSearchQuery] = useState("");
   const { category } = useLocalSearchParams();
 
