@@ -119,10 +119,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   appName: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: "bold",
     color: Colors.dark,
-    marginBottom: 4,
+    letterSpacing: 1,
   },
   version: {
     fontSize: 14,
