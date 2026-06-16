@@ -130,7 +130,7 @@ export default function HomeScreen() {
 
       <TouchableOpacity
         style={styles.favBtn}
-        onPress={() => router.push("/favorites")}
+        onPress={() => router.push("/favorites" as any)}
       >
         <Text style={styles.favBtnText}>💚 Saved Places</Text>
       </TouchableOpacity>
