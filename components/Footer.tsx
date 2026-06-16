@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <View style={styles.footer}>
       <Text style={styles.footerText}>🌿 LankaTrails</Text>
-      <Text style={styles.footerSubText}>Discover the Beauty of Sri Lanka</Text>
+      <Text style={styles.footerSubText}>Discover Sri Lanka</Text>
       <Text style={styles.footerCopy}>
         © 2026 LankaTrails. All rights reserved.
       </Text>
