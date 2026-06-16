@@ -110,6 +110,9 @@ export default function AttractionsScreen() {
           placeholderTextColor={Colors.gray}
           value={searchQuery}
           onChangeText={setSearchQuery}
+          maxLength={50}
+          returnKeyType="search"
+          clearButtonMode="while-editing"
         />
       </View>
 
