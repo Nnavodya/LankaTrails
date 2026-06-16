@@ -23,6 +23,7 @@ export default function AttractionsScreen() {
   const [imageLoading, setImageLoading] = useState<{ [key: string]: boolean }>(
     {},
   );
+  const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const { category } = useLocalSearchParams();
 
