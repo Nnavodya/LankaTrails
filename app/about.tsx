@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { Colors } from "../constants/colors";
 
@@ -79,10 +79,15 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: Colors.tabBar,
     paddingTop: 50,
-    paddingBottom: 16,
-    paddingHorizontal: 16,
+    paddingBottom: 18,
+    paddingHorizontal: 20,
     flexDirection: "row",
     alignItems: "center",
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   backBtn: {
     marginRight: 12,
