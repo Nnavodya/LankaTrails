@@ -74,6 +74,12 @@ export default function HomeScreen() {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.categoryCard, { backgroundColor: "#1B4F72" }]}
+          onPress={() =>
+            router.push({
+              pathname: "/attractions",
+              params: { category: "Hotels" },
+            } as any)
+          }
         >
           <Text style={styles.categoryIcon}>🏨</Text>
           <Text style={styles.categoryText}>Hotels</Text>
