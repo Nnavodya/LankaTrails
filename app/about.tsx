@@ -141,9 +141,9 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
   },
   cardTitle: {
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: "bold",
-    color: Colors.dark,
+    color: Colors.primary,
     marginBottom: 12,
   },
   cardText: {
