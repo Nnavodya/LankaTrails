@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Linking from "expo-linking";
+import * as Location from "expo-location";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
@@ -61,6 +62,37 @@ export default function DetailsScreen() {
     Linking.openURL(url);
   };
 
+  const calculateDistance = async () => {
+    try {
+      setLocationLoading(true);
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        alert("Location permission denied!");
+        return;
+      }
+      const location = await Location.getCurrentPositionAsync({});
+      const userLat = location.coords.latitude;
+      const userLng = location.coords.longitude;
+
+      const R = 6371;
+      const dLat = ((attraction!.latitude - userLat) * Math.PI) / 180;
+      const dLng = ((attraction!.longitude - userLng) * Math.PI) / 180;
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos((userLat * Math.PI) / 180) *
+          Math.cos((attraction!.latitude * Math.PI) / 180) *
+          Math.sin(dLng / 2) *
+          Math.sin(dLng / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const dist = R * c;
+      setDistance(dist.toFixed(1));
+    } catch (e) {
+      alert("Could not get location!");
+    } finally {
+      setLocationLoading(false);
+    }
+  };
+
   if (!attraction) {
     return (
       <View style={styles.container}>
@@ -68,7 +100,6 @@ export default function DetailsScreen() {
       </View>
     );
   }
-
   return (
     <ScrollView style={styles.container}>
       <Image
