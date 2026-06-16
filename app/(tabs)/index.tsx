@@ -50,6 +50,12 @@ export default function HomeScreen() {
       <View style={styles.categoryContainer}>
         <TouchableOpacity
           style={[styles.categoryCard, { backgroundColor: "#8B4513" }]}
+          onPress={() =>
+            router.push({
+              pathname: "/attractions",
+              params: { category: "Historical" },
+            } as any)
+          }
         >
           <Text style={styles.categoryIcon}>🏛️</Text>
           <Text style={styles.categoryText}>Historical</Text>
