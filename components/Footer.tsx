@@ -6,9 +6,6 @@ export default function Footer() {
     <View style={styles.footer}>
       <Text style={styles.footerText}>© 2026 LankaTrails</Text>
       <Text style={styles.footerSubText}>Discover Sri Lanka</Text>
-      <Text style={styles.footerCopy}>
-        © 2026 LankaTrails. All rights reserved.
-      </Text>
     </View>
   );
 }
@@ -29,9 +26,5 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: "#A8D5B5",
     marginBottom: 8,
-  },
-  footerCopy: {
-    fontSize: 11,
-    color: Colors.gray,
   },
 });
