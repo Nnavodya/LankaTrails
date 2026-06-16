@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   ScrollView,
@@ -9,7 +10,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { Colors } from "../../constants/colors";
 import { attractions } from "../../data/attractions";
@@ -115,14 +116,29 @@ export default function AttractionsScreen() {
               router.push({ pathname: "/details", params: { id: item.id } })
             }
           >
-            <Image
-              source={
-                typeof item.image === "string"
-                  ? { uri: item.image }
-                  : item.image
-              }
-              style={styles.cardImage}
-            />
+            <View>
+              {imageLoading[item.id] && (
+                <ActivityIndicator
+                  style={styles.imageLoader}
+                  size="small"
+                  color={Colors.primary}
+                />
+              )}
+              <Image
+                source={
+                  typeof item.image === "string"
+                    ? { uri: item.image }
+                    : item.image
+                }
+                style={styles.cardImage}
+                onLoadStart={() =>
+                  setImageLoading((prev) => ({ ...prev, [item.id]: true }))
+                }
+                onLoadEnd={() =>
+                  setImageLoading((prev) => ({ ...prev, [item.id]: false }))
+                }
+              />
+            </View>
             <View style={styles.cardContent}>
               <View style={styles.cardHeader}>
                 <Text style={styles.cardName}>{item.name}</Text>
@@ -271,5 +287,11 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: Colors.gray,
     lineHeight: 20,
+  },
+  imageLoader: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    zIndex: 1,
   },
 });
