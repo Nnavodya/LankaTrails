@@ -13,40 +13,52 @@ import { Colors } from "../../constants/colors";
 import { attractions } from "../../data/attractions";
 
 const featuredAttractions = attractions.slice(0, 4);
+
 export default function HomeScreen() {
   const router = useRouter();
 
   return (
-    <ScrollView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>🌿 LankaTrails</Text>
-        <Text style={styles.headerSubtitle}>Discover Sri Lanka</Text>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      {/* Hero Header */}
+      <View style={styles.hero}>
+        <View style={styles.heroOverlay}>
+          <Text style={styles.heroEmoji}>🌿</Text>
+          <Text style={styles.heroTitle}>LankaTrails</Text>
+          <Text style={styles.heroSubtitle}>
+            Discover the Pearl of the Indian Ocean
+          </Text>
+          <TouchableOpacity
+            style={styles.heroBtn}
+            onPress={() => router.push("/attractions" as any)}
+          >
+            <Text style={styles.heroBtnText}>Start Exploring →</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
-      {/* Welcome Card */}
-      <View style={styles.welcomeCard}>
-        <Text style={styles.welcomeText}>Welcome to Paradise 🌴</Text>
-        <View style={styles.statsRow}>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>9+</Text>
-            <Text style={styles.statLabel}>Attractions</Text>
-          </View>
-          <View style={styles.statDivider} />
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>3</Text>
-            <Text style={styles.statLabel}>Categories</Text>
-          </View>
-          <View style={styles.statDivider} />
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>🇱🇰</Text>
-            <Text style={styles.statLabel}>Sri Lanka</Text>
-          </View>
+      {/* Stats Row */}
+      <View style={styles.statsContainer}>
+        <View style={styles.statCard}>
+          <Text style={styles.statEmoji}>🏛️</Text>
+          <Text style={styles.statNumber}>9+</Text>
+          <Text style={styles.statLabel}>Attractions</Text>
+        </View>
+        <View style={styles.statCard}>
+          <Text style={styles.statEmoji}>📍</Text>
+          <Text style={styles.statNumber}>3</Text>
+          <Text style={styles.statLabel}>Categories</Text>
+        </View>
+        <View style={styles.statCard}>
+          <Text style={styles.statEmoji}>🇱🇰</Text>
+          <Text style={styles.statNumber}>1</Text>
+          <Text style={styles.statLabel}>Sri Lanka</Text>
         </View>
       </View>
 
       {/* Categories */}
-      <Text style={styles.sectionTitle}>Explore by Category</Text>
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>Browse Categories</Text>
+      </View>
       <View style={styles.categoryContainer}>
         <TouchableOpacity
           style={[styles.categoryCard, { backgroundColor: "#8B4513" }]}
@@ -59,6 +71,7 @@ export default function HomeScreen() {
         >
           <Text style={styles.categoryIcon}>🏛️</Text>
           <Text style={styles.categoryText}>Historical</Text>
+          <Text style={styles.categoryCount}>3 Places</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.categoryCard, { backgroundColor: "#2E8B57" }]}
@@ -71,6 +84,7 @@ export default function HomeScreen() {
         >
           <Text style={styles.categoryIcon}>🌿</Text>
           <Text style={styles.categoryText}>Nature</Text>
+          <Text style={styles.categoryCount}>3 Places</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.categoryCard, { backgroundColor: "#1B4F72" }]}
@@ -83,11 +97,17 @@ export default function HomeScreen() {
         >
           <Text style={styles.categoryIcon}>🏨</Text>
           <Text style={styles.categoryText}>Hotels</Text>
+          <Text style={styles.categoryCount}>3 Places</Text>
         </TouchableOpacity>
       </View>
 
       {/* Featured Attractions */}
-      <Text style={styles.sectionTitle}>🔥 Popular Attractions</Text>
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>🔥 Popular Attractions</Text>
+        <TouchableOpacity onPress={() => router.push("/attractions" as any)}>
+          <Text style={styles.seeAll}>See All</Text>
+        </TouchableOpacity>
+      </View>
       <FlatList
         data={featuredAttractions}
         keyExtractor={(item) => item.id}
@@ -109,37 +129,49 @@ export default function HomeScreen() {
               }
               style={styles.featuredImage}
             />
+            <View style={styles.featuredOverlay}>
+              <Text style={styles.featuredRating}>⭐ {item.rating}</Text>
+            </View>
             <View style={styles.featuredContent}>
               <Text style={styles.featuredName} numberOfLines={1}>
                 {item.name}
               </Text>
               <Text style={styles.featuredLocation}>📍 {item.location}</Text>
-              <Text style={styles.featuredRating}>⭐ {item.rating}</Text>
             </View>
           </TouchableOpacity>
         )}
       />
 
-      {/* Buttons */}
-      <TouchableOpacity
-        style={styles.exploreBtn}
-        onPress={() => router.push("/attractions" as any)}
-      >
-        <Text style={styles.exploreBtnText}>Explore All Attractions →</Text>
-      </TouchableOpacity>
+      {/* Action Buttons */}
+      <View style={styles.actionContainer}>
+        <TouchableOpacity
+          style={styles.actionCard}
+          onPress={() => router.push("/attractions" as any)}
+        >
+          <Text style={styles.actionIcon}>🗺️</Text>
+          <Text style={styles.actionTitle}>Explore</Text>
+          <Text style={styles.actionSubtitle}>All Attractions</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.favBtn}
-        onPress={() => router.push("/favorites" as any)}
-      >
-        <Text style={styles.favBtnText}>💚 Saved Places</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.aboutBtn}
-        onPress={() => router.push("/about" as any)}
-      >
-        <Text style={styles.aboutBtnText}>ℹ️ About LankaTrails</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.actionCard}
+          onPress={() => router.push("/favorites" as any)}
+        >
+          <Text style={styles.actionIcon}>❤️</Text>
+          <Text style={styles.actionTitle}>Saved</Text>
+          <Text style={styles.actionSubtitle}>My Favorites</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.actionCard}
+          onPress={() => router.push("/about" as any)}
+        >
+          <Text style={styles.actionIcon}>ℹ️</Text>
+          <Text style={styles.actionTitle}>About</Text>
+          <Text style={styles.actionSubtitle}>LankaTrails</Text>
+        </TouchableOpacity>
+      </View>
+
       <Footer />
     </ScrollView>
   );
@@ -150,143 +182,163 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background,
   },
-  header: {
+  hero: {
+    height: 280,
     backgroundColor: Colors.tabBar,
-    padding: 40,
-    paddingTop: 60,
+    justifyContent: "center",
     alignItems: "center",
   },
-  headerTitle: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: Colors.white,
+  heroOverlay: {
+    alignItems: "center",
+    paddingHorizontal: 24,
+    paddingTop: 40,
   },
-  headerSubtitle: {
-    fontSize: 16,
-    color: "#A8D5B5",
-    marginTop: 4,
-  },
-  welcomeCard: {
-    backgroundColor: Colors.white,
-    margin: 16,
-    padding: 20,
-    borderRadius: 12,
-    elevation: 3,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-  },
-  welcomeText: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: Colors.dark,
+  heroEmoji: {
+    fontSize: 48,
     marginBottom: 8,
   },
-  statsRow: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
+  heroTitle: {
+    fontSize: 36,
+    fontWeight: "bold",
+    color: Colors.white,
+    marginBottom: 8,
   },
-  statItem: {
+  heroSubtitle: {
+    fontSize: 14,
+    color: "#A8D5B5",
+    textAlign: "center",
+    marginBottom: 20,
+    lineHeight: 20,
+  },
+  heroBtn: {
+    backgroundColor: Colors.secondary,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 25,
+    elevation: 3,
+  },
+  heroBtnText: {
+    color: Colors.white,
+    fontWeight: "bold",
+    fontSize: 15,
+  },
+  statsContainer: {
+    flexDirection: "row",
+    marginHorizontal: 16,
+    marginTop: -20,
+    marginBottom: 24,
+    gap: 12,
+  },
+  statCard: {
+    flex: 1,
+    backgroundColor: Colors.white,
+    borderRadius: 12,
+    padding: 14,
     alignItems: "center",
+    elevation: 4,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+  },
+  statEmoji: {
+    fontSize: 20,
+    marginBottom: 4,
   },
   statNumber: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
     color: Colors.primary,
   },
   statLabel: {
-    fontSize: 12,
+    fontSize: 11,
     color: Colors.gray,
     marginTop: 2,
+    textAlign: "center",
   },
-  statDivider: {
-    width: 1,
-    height: 40,
-    backgroundColor: Colors.lightGray,
+  sectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    marginBottom: 12,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
     color: Colors.dark,
-    marginLeft: 16,
-    marginBottom: 12,
+  },
+  seeAll: {
+    fontSize: 14,
+    color: Colors.primary,
+    fontWeight: "600",
   },
   categoryContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
     paddingHorizontal: 16,
-    marginBottom: 24,
+    marginBottom: 28,
+    gap: 10,
   },
   categoryCard: {
     flex: 1,
-    margin: 4,
-    padding: 16,
-    borderRadius: 12,
+    padding: 14,
+    borderRadius: 16,
     alignItems: "center",
-    elevation: 2,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
   },
   categoryIcon: {
-    fontSize: 36,
+    fontSize: 32,
     marginBottom: 6,
   },
   categoryText: {
     color: Colors.white,
     fontWeight: "bold",
     fontSize: 12,
+    marginBottom: 2,
   },
-  exploreBtn: {
-    backgroundColor: Colors.primary,
-    margin: 16,
-    padding: 16,
-    borderRadius: 12,
-    alignItems: "center",
-    elevation: 2,
+  categoryCount: {
+    color: "rgba(255,255,255,0.7)",
+    fontSize: 10,
   },
-  exploreBtnText: {
-    color: Colors.white,
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  favBtn: {
-    backgroundColor: Colors.white,
-    marginHorizontal: 16,
-    marginBottom: 16,
-    padding: 16,
-    borderRadius: 12,
-    alignItems: "center",
-    borderWidth: 2,
-    borderColor: Colors.primary,
-    elevation: 2,
-  },
-  favBtnText: {
-    color: Colors.primary,
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-
   featuredList: {
     paddingHorizontal: 16,
-    paddingBottom: 16,
+    paddingBottom: 8,
   },
   featuredCard: {
     backgroundColor: Colors.white,
-    borderRadius: 12,
-    marginRight: 12,
-    width: 180,
-    elevation: 3,
+    borderRadius: 16,
+    marginRight: 14,
+    width: 190,
+    elevation: 4,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.15,
     overflow: "hidden",
+    marginBottom: 8,
   },
   featuredImage: {
     width: "100%",
-    height: 120,
+    height: 130,
     backgroundColor: Colors.lightGray,
   },
+  featuredOverlay: {
+    position: "absolute",
+    top: 8,
+    right: 8,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 10,
+  },
+  featuredRating: {
+    color: Colors.white,
+    fontSize: 11,
+    fontWeight: "bold",
+  },
   featuredContent: {
-    padding: 10,
+    padding: 12,
   },
   featuredName: {
     fontSize: 13,
@@ -297,11 +349,38 @@ const styles = StyleSheet.create({
   featuredLocation: {
     fontSize: 11,
     color: Colors.gray,
+  },
+  actionContainer: {
+    flexDirection: "row",
+    paddingHorizontal: 16,
+    marginTop: 8,
+    marginBottom: 24,
+    gap: 10,
+  },
+  actionCard: {
+    flex: 1,
+    backgroundColor: Colors.white,
+    borderRadius: 16,
+    padding: 16,
+    alignItems: "center",
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+  },
+  actionIcon: {
+    fontSize: 28,
+    marginBottom: 6,
+  },
+  actionTitle: {
+    fontSize: 13,
+    fontWeight: "bold",
+    color: Colors.dark,
     marginBottom: 2,
   },
-  featuredRating: {
-    fontSize: 11,
-    color: Colors.secondary,
-    fontWeight: "bold",
+  actionSubtitle: {
+    fontSize: 10,
+    color: Colors.gray,
+    textAlign: "center",
   },
 });
