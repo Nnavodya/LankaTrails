@@ -1,0 +1,161 @@
+import { useRouter } from "expo-router";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
+import { Colors } from "../constants/colors";
+
+export default function AboutScreen() {
+  const router = useRouter();
+
+  return (
+    <ScrollView style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
+          <Text style={styles.backText}>← Back</Text>
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>About LankaTrails</Text>
+      </View>
+
+      {/* Logo Section */}
+      <View style={styles.logoSection}>
+        <Text style={styles.logo}>🌿</Text>
+        <Text style={styles.appName}>LankaTrails</Text>
+        <Text style={styles.version}>Version 1.0.0</Text>
+      </View>
+
+      {/* About Card */}
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>About the App</Text>
+        <Text style={styles.cardText}>
+          LankaTrails is a local tour and travel guide app designed to help
+          tourists explore the beauty of Sri Lanka. Discover historical
+          fortresses, lush nature reserves, and luxury hotels across the island.
+        </Text>
+      </View>
+
+      {/* Features Card */}
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Features</Text>
+        <Text style={styles.feature}>🏛️ Browse Historical Sites</Text>
+        <Text style={styles.feature}>🌿 Explore Nature Reserves</Text>
+        <Text style={styles.feature}>🏨 Discover Luxury Hotels</Text>
+        <Text style={styles.feature}>❤️ Save Your Favorites</Text>
+        <Text style={styles.feature}>🗺️ GPS Navigation</Text>
+        <Text style={styles.feature}>📍 Distance Calculator</Text>
+        <Text style={styles.feature}>🔍 Search Attractions</Text>
+      </View>
+
+      {/* Developer Card */}
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Developer</Text>
+        <Text style={styles.cardText}>University of Kelaniya</Text>
+        <Text style={styles.cardText}>
+          SENG 31323 - Mobile Computing Technology
+        </Text>
+        <Text style={styles.cardText}>
+          Bachelor of Science in Software Engineering
+        </Text>
+      </View>
+
+      {/* Footer */}
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>© 2026 LankaTrails</Text>
+        <Text style={styles.footerSubText}>Discover Sri Lanka 🇱🇰</Text>
+      </View>
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.background,
+  },
+  header: {
+    backgroundColor: Colors.tabBar,
+    paddingTop: 50,
+    paddingBottom: 16,
+    paddingHorizontal: 16,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  backBtn: {
+    marginRight: 12,
+  },
+  backText: {
+    color: Colors.white,
+    fontSize: 16,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: Colors.white,
+  },
+  logoSection: {
+    alignItems: "center",
+    paddingVertical: 32,
+    backgroundColor: Colors.white,
+    marginBottom: 16,
+  },
+  logo: {
+    fontSize: 64,
+    marginBottom: 8,
+  },
+  appName: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: Colors.dark,
+    marginBottom: 4,
+  },
+  version: {
+    fontSize: 14,
+    color: Colors.gray,
+  },
+  card: {
+    backgroundColor: Colors.white,
+    marginHorizontal: 16,
+    marginBottom: 16,
+    padding: 20,
+    borderRadius: 12,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: Colors.dark,
+    marginBottom: 12,
+  },
+  cardText: {
+    fontSize: 14,
+    color: Colors.gray,
+    lineHeight: 22,
+    marginBottom: 4,
+  },
+  feature: {
+    fontSize: 14,
+    color: Colors.dark,
+    lineHeight: 28,
+  },
+  footer: {
+    alignItems: "center",
+    padding: 24,
+  },
+  footerText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: Colors.dark,
+  },
+  footerSubText: {
+    fontSize: 12,
+    color: Colors.gray,
+    marginTop: 4,
+  },
+});

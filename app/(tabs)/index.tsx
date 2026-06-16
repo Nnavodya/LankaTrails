@@ -134,6 +134,12 @@ export default function HomeScreen() {
       >
         <Text style={styles.favBtnText}>💚 Saved Places</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.aboutBtn}
+        onPress={() => router.push("/about" as any)}
+      >
+        <Text style={styles.aboutBtnText}>ℹ️ About LankaTrails</Text>
+      </TouchableOpacity>
       <Footer />
     </ScrollView>
   );
