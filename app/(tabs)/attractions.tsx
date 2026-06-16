@@ -45,6 +45,7 @@ export default function AttractionsScreen() {
       if (saved) setFavorites(JSON.parse(saved));
     } catch (e) {
       console.log(e);
+      setError("Failed to load favorites. Please try again.");
     }
   };
 
@@ -66,6 +67,13 @@ export default function AttractionsScreen() {
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Explore Sri Lanka</Text>
       </View>
+
+      {/* Error Message */}
+      {error && (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>⚠️ {error}</Text>
+        </View>
+      )}
 
       {/* Filter Bar */}
       <ScrollView
@@ -110,6 +118,14 @@ export default function AttractionsScreen() {
         data={filteredAttractions}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContainer}
+        ListEmptyComponent={
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>🔍 No attractions found</Text>
+            <Text style={styles.emptySubText}>
+              Try a different search or category
+            </Text>
+          </View>
+        }
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.card}
@@ -185,6 +201,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: Colors.white,
   },
+  errorContainer: {
+    backgroundColor: "#FFE5E5",
+    padding: 12,
+    margin: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: Colors.danger,
+  },
+  errorText: {
+    color: Colors.danger,
+    fontSize: 14,
+    textAlign: "center",
+  },
   filterBar: {
     paddingHorizontal: 12,
     paddingVertical: 12,
@@ -230,6 +259,20 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     padding: 16,
+  },
+  emptyContainer: {
+    alignItems: "center",
+    paddingVertical: 48,
+  },
+  emptyText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: Colors.dark,
+    marginBottom: 8,
+  },
+  emptySubText: {
+    fontSize: 14,
+    color: Colors.gray,
   },
   card: {
     backgroundColor: Colors.white,
