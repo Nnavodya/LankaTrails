@@ -160,16 +160,16 @@ const styles = StyleSheet.create({
   },
   footer: {
     alignItems: "center",
-    padding: 24,
+    paddingVertical: 30,
   },
   footerText: {
-    fontSize: 14,
-    fontWeight: "bold",
+    fontSize: 15,
+    fontWeight: "600",
     color: Colors.dark,
   },
   footerSubText: {
-    fontSize: 12,
+    fontSize: 13,
     color: Colors.gray,
-    marginTop: 4,
+    marginTop: 6,
   },
 });
