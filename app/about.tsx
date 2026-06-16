@@ -108,9 +108,11 @@ const styles = StyleSheet.create({
   },
   logoSection: {
     alignItems: "center",
-    paddingVertical: 32,
+    paddingVertical: 40,
     backgroundColor: Colors.white,
-    marginBottom: 16,
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
+    marginBottom: 20,
   },
   logo: {
     fontSize: 64,
