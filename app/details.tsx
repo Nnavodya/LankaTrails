@@ -4,6 +4,7 @@ import * as Location from "expo-location";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   Image,
   ScrollView,
   StyleSheet,
@@ -100,6 +101,7 @@ export default function DetailsScreen() {
       </View>
     );
   }
+
   return (
     <ScrollView style={styles.container}>
       <Image
@@ -140,6 +142,29 @@ export default function DetailsScreen() {
             🗺️ Navigate with Google Maps
           </Text>
         </TouchableOpacity>
+
+        {/* Distance Calculator */}
+        <TouchableOpacity
+          style={styles.distanceBtn}
+          onPress={calculateDistance}
+          disabled={locationLoading}
+        >
+          {locationLoading ? (
+            <ActivityIndicator color={Colors.white} size="small" />
+          ) : (
+            <Text style={styles.distanceBtnText}>
+              📍 Calculate Distance from Me
+            </Text>
+          )}
+        </TouchableOpacity>
+
+        {distance && (
+          <View style={styles.distanceResult}>
+            <Text style={styles.distanceResultText}>
+              🗺️ You are {distance} km away
+            </Text>
+          </View>
+        )}
 
         <TouchableOpacity
           style={[styles.favoriteBtn, isFavorite && styles.favoriteBtnActive]}
@@ -254,6 +279,31 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: 16,
     fontWeight: "bold",
+  },
+  distanceBtn: {
+    backgroundColor: Colors.secondary,
+    padding: 16,
+    borderRadius: 12,
+    alignItems: "center",
+    marginBottom: 12,
+    elevation: 2,
+  },
+  distanceBtnText: {
+    color: Colors.white,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  distanceResult: {
+    backgroundColor: Colors.lightGray,
+    padding: 12,
+    borderRadius: 10,
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  distanceResultText: {
+    fontSize: 15,
+    fontWeight: "bold",
+    color: Colors.dark,
   },
   favoriteBtn: {
     backgroundColor: Colors.white,
