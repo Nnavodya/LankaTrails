@@ -153,9 +153,10 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   feature: {
-    fontSize: 14,
+    fontSize: 15,
     color: Colors.dark,
-    lineHeight: 28,
+    marginVertical: 4,
+    paddingVertical: 2,
   },
   footer: {
     alignItems: "center",
