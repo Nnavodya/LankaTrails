@@ -90,11 +90,16 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   backBtn: {
+    backgroundColor: "rgba(255,255,255,0.2)",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
     marginRight: 12,
   },
   backText: {
     color: Colors.white,
-    fontSize: 16,
+    fontWeight: "600",
+    fontSize: 15,
   },
   headerTitle: {
     fontSize: 20,
