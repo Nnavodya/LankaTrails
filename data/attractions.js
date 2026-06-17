@@ -4,7 +4,7 @@ export const attractions = [
     name: "Sigiriya Rock Fortress",
     category: "Historical",
     description:
-      "Ancient rock fortress and palace ruin in the central Matale District. A UNESCO World Heritage Site rising 200m above the surrounding plains.",
+      "Rising dramatically 200 meters above the surrounding plains, Sigiriya is one of the world's most spectacular ancient rock fortresses. Built by King Kashyapa in the 5th century AD, this UNESCO World Heritage Site features stunning frescoes of celestial maidens, the famous Mirror Wall inscribed with ancient poetry, and breathtaking panoramic views from the summit. A true marvel of ancient engineering and artistry.",
     image: require("../assets/images/sigiriya.jpg"),
     latitude: 7.957,
     longitude: 80.7603,
@@ -16,7 +16,7 @@ export const attractions = [
     name: "Temple of the Sacred Tooth Relic",
     category: "Historical",
     description:
-      "A Buddhist temple in Kandy which houses the relic of the tooth of the Buddha. A UNESCO World Heritage Site.",
+      "Nestled in the heart of Kandy, the Temple of the Sacred Tooth Relic is Sri Lanka's most sacred Buddhist site. Housing the legendary tooth relic of the Buddha, this magnificent 17th-century temple complex draws millions of pilgrims and visitors each year. The ornate architecture, golden rooftops, and the enchanting evening puja ceremony create an atmosphere of deep spiritual reverence and cultural grandeur.",
     image: require("../assets/images/templeOfTooth.jpg"),
     latitude: 7.2936,
     longitude: 80.6413,
@@ -28,7 +28,7 @@ export const attractions = [
     name: "Galle Fort",
     category: "Historical",
     description:
-      "A fortification built by the Portuguese in 1588 and extensively fortified by the Dutch. A UNESCO World Heritage Site.",
+      "Perched on a rocky peninsula along Sri Lanka's stunning southern coastline, Galle Fort is a living testament to the island's colonial heritage. Originally built by the Portuguese in 1588 and later fortified by the Dutch in the 17th century, this UNESCO World Heritage Site is a magical blend of European architecture and South Asian traditions. Wander through cobblestone streets lined with boutique hotels, art galleries, and charming cafés.",
     image: require("../assets/images/galle-fort.jpg"),
     latitude: 6.0267,
     longitude: 80.217,
@@ -40,7 +40,7 @@ export const attractions = [
     name: "Yala National Park",
     category: "Nature",
     description:
-      "The most visited national park in Sri Lanka. Famous for its leopard population and diverse wildlife including elephants and crocodiles.",
+      "Sri Lanka's most visited and second largest national park, Yala is a breathtaking wilderness stretching across 979 square kilometers. Famous for having one of the highest densities of leopards in the world, this remarkable sanctuary is also home to elephants, sloth bears, crocodiles, and hundreds of bird species. The dramatic landscape of dense jungle, open grasslands, and rocky outcrops creates an unforgettable safari experience unlike any other.",
     image: require("../assets/images/yala.jpg"),
     latitude: 6.3728,
     longitude: 81.5216,
@@ -52,7 +52,7 @@ export const attractions = [
     name: "Horton Plains National Park",
     category: "Nature",
     description:
-      "A protected area in the central highlands. Home to World's End, a sheer cliff with a drop of 870m and Baker's Falls.",
+      "Cloaked in mist and mystery, Horton Plains is a hauntingly beautiful highland plateau situated at 2,100 meters above sea level. This UNESCO World Heritage Site is home to the dramatic World's End — a sheer cliff that drops 870 meters into the valley below — and the magnificent Baker's Falls cascading through dense cloud forest. The cool, misty climate nurtures unique flora and fauna found nowhere else on Earth.",
     image: require("../assets/images/horton-plains.jpg"),
     latitude: 6.8097,
     longitude: 80.8046,
@@ -64,7 +64,7 @@ export const attractions = [
     name: "Sinharaja Forest Reserve",
     category: "Nature",
     description:
-      "Last viable area of primary tropical rainforest in Sri Lanka. A UNESCO World Heritage Site and biodiversity hotspot.",
+      "Deep in Sri Lanka's southwestern lowlands lies Sinharaja — the island's last remaining viable area of primary tropical rainforest and a UNESCO World Heritage Site. This ancient forest is a treasure trove of biodiversity, sheltering over 60% of Sri Lanka's endemic species including the majestic Purple-faced Langur, rare butterflies, and endemic birds. Walking through its emerald canopy feels like stepping into a primeval world untouched by time.",
     image: require("../assets/images/sinharaja.jpg"),
     latitude: 6.4,
     longitude: 80.5,
@@ -76,7 +76,7 @@ export const attractions = [
     name: "Cinnamon Grand Colombo",
     category: "Hotels",
     description:
-      "A five-star luxury hotel in the heart of Colombo. Features world-class dining, spa, and stunning city views.",
+      "Standing tall in the heart of Sri Lanka's vibrant capital, Cinnamon Grand Colombo is the epitome of five-star luxury and contemporary elegance. This iconic hotel features world-class dining across multiple award-winning restaurants, a stunning rooftop pool, a rejuvenating spa sanctuary, and impeccably appointed rooms with breathtaking city views. Whether you're here for business or leisure, Cinnamon Grand promises an experience of unparalleled sophistication.",
     image: require("../assets/images/cinamon.jpg"),
     latitude: 6.9147,
     longitude: 79.8535,
@@ -88,7 +88,7 @@ export const attractions = [
     name: "Heritance Kandalama",
     category: "Hotels",
     description:
-      "An eco-friendly luxury hotel designed by Geoffrey Bawa, blending seamlessly with the surrounding jungle and Kandalama Lake.",
+      "Designed by the legendary Sri Lankan architect Geoffrey Bawa, Heritance Kandalama is a masterpiece of eco-luxury architecture seamlessly integrated into the surrounding jungle and Kandalama Lake. Vines cascade down its façade as wildlife roams freely through its corridors. Guests enjoy stunning views of Sigiriya Rock from their rooms, world-class cuisine, and an infinity pool that seems to merge with the lake below — a truly one-of-a-kind retreat.",
     image: require("../assets/images/kandalama.jpg"),
     latitude: 7.9319,
     longitude: 80.7558,
@@ -100,7 +100,7 @@ export const attractions = [
     name: "Jetwing Lighthouse",
     category: "Hotels",
     description:
-      "A luxury beachfront hotel in Galle designed by Geoffrey Bawa. Offers stunning ocean views and world-class amenities.",
+      "Perched dramatically on a rocky headland overlooking the Indian Ocean, Jetwing Lighthouse in Galle is another Geoffrey Bawa masterpiece that perfectly marries colonial elegance with modern luxury. The hotel's striking lighthouse tower, stunning ocean-view rooms, spectacular infinity pool, and exceptional seafood dining make it one of Sri Lanka's most romantic and sought-after destinations. Wake up to the sound of waves and drift to sleep under a canopy of stars.",
     image: require("../assets/images/jetwin.jpg"),
     latitude: 6.04,
     longitude: 80.21,
