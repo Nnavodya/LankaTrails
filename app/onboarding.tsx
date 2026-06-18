@@ -67,6 +67,16 @@ export default function OnboardingScreen() {
         </TouchableOpacity>
       )}
 
+      {/* Back Button */}
+      {currentIndex > 0 && (
+        <TouchableOpacity
+          style={styles.backBtn}
+          onPress={() => setCurrentIndex(currentIndex - 1)}
+        >
+          <Text style={styles.backText}>← Back</Text>
+        </TouchableOpacity>
+      )}
+
       {/* Slide Content */}
       <View style={styles.slideContainer}>
         <Text style={styles.slideEmoji}>{slides[currentIndex].emoji}</Text>
