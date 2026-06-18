@@ -148,6 +148,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
     lineHeight: 24,
   },
+  backBtn: {
+    position: "absolute",
+    top: 56,
+    left: 24,
+    padding: 8,
+  },
+  backText: {
+    color: "#A8D5B5",
+    fontSize: 16,
+    fontWeight: "600",
+  },
   dotsContainer: {
     flexDirection: "row",
     marginBottom: 48,
