@@ -2,6 +2,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   Dimensions,
+  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,32 +10,44 @@ import {
 } from "react-native";
 import { Colors } from "../constants/colors";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 const slides = [
   {
     id: "1",
-    emoji: "🌿",
-    title: "Welcome to LankaTrails",
-    subtitle: "Discover the most beautiful destinations in Sri Lanka",
+    image: require("../assets/images/sigiriya.jpg"),
+    tag: "Explore Sri Lanka",
+    title: "Discover Ancient",
+    highlight: "Wonders",
+    subtitle:
+      "Journey through centuries of history and marvel at Sri Lanka's most iconic ancient fortresses and temples.",
   },
   {
     id: "2",
-    emoji: "🏛️",
-    title: "Explore Attractions",
-    subtitle: "Browse Historical sites, Nature reserves and Luxury Hotels",
+    image: require("../assets/images/yala.jpg"),
+    tag: "Nature & Wildlife",
+    title: "Experience Wild",
+    highlight: "Nature",
+    subtitle:
+      "Explore breathtaking national parks and rainforests teeming with exotic wildlife and natural beauty.",
   },
   {
     id: "3",
-    emoji: "🗺️",
-    title: "Navigate with GPS",
-    subtitle: "Get directions and calculate distance to any attraction",
+    image: require("../assets/images/kandalama.jpg"),
+    tag: "Luxury Stays",
+    title: "Stay in Pure",
+    highlight: "Luxury",
+    subtitle:
+      "Indulge in world-class hotels that blend seamlessly with Sri Lanka's stunning natural landscapes.",
   },
   {
     id: "4",
-    emoji: "❤️",
-    title: "Save Your Favorites",
-    subtitle: "Bookmark attractions and access them anytime",
+    image: require("../assets/images/galle-fort.jpg"),
+    tag: "LankaTrails",
+    title: "Your Perfect",
+    highlight: "Travel Guide",
+    subtitle:
+      "Save favorites, navigate with GPS, and discover the Pearl of the Indian Ocean like never before.",
   },
 ];
 
@@ -42,66 +55,83 @@ export default function OnboardingScreen() {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleGetStarted = () => {
-    router.replace("/(tabs)" as any);
-  };
-
   const handleNext = () => {
     if (currentIndex < slides.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      handleGetStarted();
+      router.replace("/(tabs)" as any);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
     }
   };
 
   const handleSkip = () => {
-    handleGetStarted();
+    router.replace("/(tabs)" as any);
   };
+
+  const slide = slides[currentIndex];
 
   return (
     <View style={styles.container}>
-      {/* Skip Button */}
-      {currentIndex < slides.length - 1 && (
-        <TouchableOpacity style={styles.skipBtn} onPress={handleSkip}>
-          <Text style={styles.skipText}>Skip</Text>
-        </TouchableOpacity>
-      )}
+      {/* Background Image */}
+      <Image source={slide.image} style={styles.bgImage} />
 
-      {/* Back Button */}
-      {currentIndex > 0 && (
-        <TouchableOpacity
-          style={styles.backBtn}
-          onPress={() => setCurrentIndex(currentIndex - 1)}
-        >
-          <Text style={styles.backText}>← Back</Text>
-        </TouchableOpacity>
-      )}
+      {/* Gradient Overlay */}
+      <View style={styles.overlay} />
 
-      {/* Slide Content */}
-      <View style={styles.slideContainer}>
-        <Text style={styles.slideEmoji}>{slides[currentIndex].emoji}</Text>
-        <Text style={styles.slideTitle}>{slides[currentIndex].title}</Text>
-        <Text style={styles.slideSubtitle}>
-          {slides[currentIndex].subtitle}
-        </Text>
+      {/* Top Bar */}
+      <View style={styles.topBar}>
+        {/* Tag */}
+        <View style={styles.tagContainer}>
+          <Text style={styles.tagDot}>🌿</Text>
+          <Text style={styles.tagText}>{slide.tag}</Text>
+        </View>
+
+        {/* Skip */}
+        {currentIndex < slides.length - 1 && (
+          <TouchableOpacity onPress={handleSkip} style={styles.skipBtn}>
+            <Text style={styles.skipText}>Skip</Text>
+          </TouchableOpacity>
+        )}
       </View>
 
-      {/* Dots */}
-      <View style={styles.dotsContainer}>
-        {slides.map((_, index) => (
-          <View
-            key={index}
-            style={[styles.dot, currentIndex === index && styles.dotActive]}
-          />
-        ))}
-      </View>
+      {/* Content */}
+      <View style={styles.content}>
+        <Text style={styles.title}>{slide.title}</Text>
+        <Text style={styles.highlight}>{slide.highlight}</Text>
+        <Text style={styles.subtitle}>{slide.subtitle}</Text>
 
-      {/* Button */}
-      <TouchableOpacity style={styles.nextBtn} onPress={handleNext}>
-        <Text style={styles.nextBtnText}>
-          {currentIndex === slides.length - 1 ? "Get Started 🚀" : "Next →"}
-        </Text>
-      </TouchableOpacity>
+        {/* Dots */}
+        <View style={styles.dotsContainer}>
+          {slides.map((_, index) => (
+            <View
+              key={index}
+              style={[styles.dot, currentIndex === index && styles.dotActive]}
+            />
+          ))}
+        </View>
+
+        {/* Buttons */}
+        <View style={styles.btnRow}>
+          {currentIndex > 0 && (
+            <TouchableOpacity style={styles.backBtn} onPress={handleBack}>
+              <Text style={styles.backBtnText}>←</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity
+            style={[styles.nextBtn, currentIndex === 0 && styles.nextBtnFull]}
+            onPress={handleNext}
+          >
+            <Text style={styles.nextBtnText}>
+              {currentIndex === slides.length - 1 ? "Get Started 🚀" : "Next →"}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }
@@ -109,83 +139,131 @@ export default function OnboardingScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.tabBar,
+    backgroundColor: "#000",
+  },
+  bgImage: {
+    position: "absolute",
+    width: width,
+    height: height,
+    resizeMode: "cover",
+  },
+  overlay: {
+    position: "absolute",
+    width: width,
+    height: height,
+    backgroundColor: "rgba(0,0,0,0.55)",
+  },
+  topBar: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 56,
     paddingHorizontal: 24,
   },
+  tagContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(255,255,255,0.15)",
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    gap: 6,
+  },
+  tagDot: {
+    fontSize: 14,
+  },
+  tagText: {
+    color: Colors.white,
+    fontSize: 13,
+    fontWeight: "600",
+  },
   skipBtn: {
-    position: "absolute",
-    top: 56,
-    right: 24,
-    padding: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    backgroundColor: "rgba(255,255,255,0.15)",
+    borderRadius: 20,
   },
   skipText: {
-    color: "#A8D5B5",
-    fontSize: 16,
+    color: Colors.white,
+    fontSize: 13,
     fontWeight: "600",
   },
-  slideContainer: {
-    alignItems: "center",
-    marginBottom: 48,
-    paddingHorizontal: 16,
+  content: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: 28,
+    paddingBottom: 48,
   },
-  slideEmoji: {
-    fontSize: 100,
-    marginBottom: 32,
-  },
-  slideTitle: {
-    fontSize: 28,
+  title: {
+    fontSize: 38,
     fontWeight: "bold",
     color: Colors.white,
-    textAlign: "center",
+    lineHeight: 46,
+  },
+  highlight: {
+    fontSize: 38,
+    fontWeight: "bold",
+    color: Colors.secondary,
+    lineHeight: 46,
     marginBottom: 16,
-    lineHeight: 36,
   },
-  slideSubtitle: {
-    fontSize: 16,
-    color: "#A8D5B5",
-    textAlign: "center",
+  subtitle: {
+    fontSize: 15,
+    color: "rgba(255,255,255,0.8)",
     lineHeight: 24,
-  },
-  backBtn: {
-    position: "absolute",
-    top: 56,
-    left: 24,
-    padding: 8,
-  },
-  backText: {
-    color: "#A8D5B5",
-    fontSize: 16,
-    fontWeight: "600",
+    marginBottom: 32,
   },
   dotsContainer: {
     flexDirection: "row",
-    marginBottom: 48,
+    marginBottom: 28,
     gap: 8,
   },
   dot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: "rgba(255,255,255,0.3)",
+    backgroundColor: "rgba(255,255,255,0.4)",
   },
   dotActive: {
-    width: 24,
+    width: 28,
     backgroundColor: Colors.secondary,
   },
-  nextBtn: {
-    backgroundColor: Colors.secondary,
-    paddingHorizontal: 48,
-    paddingVertical: 16,
-    borderRadius: 30,
-    elevation: 4,
-    width: "100%",
+  btnRow: {
+    flexDirection: "row",
+    gap: 12,
+  },
+  backBtn: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: "rgba(255,255,255,0.2)",
     alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.3)",
+  },
+  backBtnText: {
+    color: Colors.white,
+    fontSize: 22,
+    fontWeight: "bold",
+  },
+  nextBtn: {
+    flex: 1,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: Colors.secondary,
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 4,
+  },
+  nextBtnFull: {
+    flex: 1,
   },
   nextBtnText: {
     color: Colors.white,
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: "bold",
   },
 });
