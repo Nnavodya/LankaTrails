@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -6,7 +5,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { Colors } from "../constants/colors";
 
@@ -43,8 +42,7 @@ export default function OnboardingScreen() {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleGetStarted = async () => {
-    await AsyncStorage.setItem("onboarded", "true");
+  const handleGetStarted = () => {
     router.replace("/(tabs)" as any);
   };
 
