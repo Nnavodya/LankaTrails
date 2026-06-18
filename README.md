@@ -73,41 +73,41 @@ LankaTrails/
 
 ├── app/
 
-│ ├── (tabs)/
+│   ├── (tabs)/
 
-│ │ ├── \_layout.tsx # Bottom Tab Navigation
+│   │   ├── _layout.tsx      # Bottom Tab Navigation
 
-│ │ ├── index.tsx # Home Screen
+│   │   ├── index.tsx        # Home Screen
 
-│ │ ├── attractions.tsx # Attractions List + Filter + Search
+│   │   ├── attractions.tsx  # Attractions List + Filter + Search
 
-│ │ └── favorites.tsx # Favorites Screen
+│   │   └── favorites.tsx    # Favorites Screen
 
-│ ├── \_layout.tsx # Root Layout
+│   ├── _layout.tsx          # Root Layout
 
-│ ├── details.tsx # Attraction Detail + GPS + Distance
+│   ├── details.tsx          # Attraction Detail + GPS + Distance
 
-│ ├── about.tsx # About Screen
+│   ├── about.tsx            # About Screen
 
-│ ├── onboarding.tsx # Onboarding Slides
+│   ├── onboarding.tsx       # Onboarding Slides
 
-│ └── index.tsx # Redirect to Onboarding
+│   └── index.tsx            # Redirect to Onboarding
 
 ├── components/
 
-│ └── Footer.tsx
+│   └── Footer.tsx
 
 ├── constants/
 
-│ └── colors.js
+│   └── colors.js
 
 ├── data/
 
-│ └── attractions.js # Sri Lanka attractions data
+│   └── attractions.js       # Sri Lanka attractions data
 
 └── assets/
 
-└── images/ # Local attraction images
+└── images/              # Local attraction images
 
 ---
 
