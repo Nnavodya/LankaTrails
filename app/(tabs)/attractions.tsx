@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
@@ -13,12 +12,14 @@ import {
   View,
 } from "react-native";
 import { Colors } from "../../constants/colors";
+import { useFavorites } from "../../contexts/FavoritesContext";
 import { attractions } from "../../data/attractions";
 
 const CATEGORIES = ["All", "Historical", "Nature", "Hotels"];
 
 export default function AttractionsScreen() {
   const router = useRouter();
+  const { favorites } = useFavorites();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [imageLoading, setImageLoading] = useState<{ [key: string]: boolean }>(
     {},
@@ -32,22 +33,6 @@ export default function AttractionsScreen() {
       setSelectedCategory(category as string);
     }
   }, [category]);
-
-  const [favorites, setFavorites] = useState<string[]>([]);
-
-  useEffect(() => {
-    loadFavorites();
-  }, []);
-
-  const loadFavorites = async () => {
-    try {
-      const saved = await AsyncStorage.getItem("favorites");
-      if (saved) setFavorites(JSON.parse(saved));
-    } catch (e) {
-      console.log(e);
-      setError("Failed to load favorites. Please try again.");
-    }
-  };
 
   const filteredAttractions = attractions.filter((a) => {
     const matchCategory =
@@ -158,6 +143,11 @@ export default function AttractionsScreen() {
                   setImageLoading((prev) => ({ ...prev, [item.id]: false }))
                 }
               />
+              {favorites.includes(item.id) && (
+                <View style={styles.favBadge}>
+                  <Text style={styles.favBadgeText}>❤️</Text>
+                </View>
+              )}
             </View>
             <View style={styles.cardContent}>
               <View style={styles.cardHeader}>
@@ -197,7 +187,7 @@ const styles = StyleSheet.create({
   },
   backText: {
     color: Colors.white,
-    fontSize: 16,
+    fontSize: 24,
   },
   headerTitle: {
     fontSize: 20,
@@ -291,6 +281,17 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 180,
     backgroundColor: Colors.lightGray,
+  },
+  favBadge: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    backgroundColor: "rgba(255,255,255,0.9)",
+    borderRadius: 16,
+    padding: 6,
+  },
+  favBadgeText: {
+    fontSize: 16,
   },
   cardContent: {
     padding: 14,
