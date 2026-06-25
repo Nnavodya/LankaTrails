@@ -1,7 +1,7 @@
 import * as Linking from "expo-linking";
 import * as Location from "expo-location";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -24,39 +24,6 @@ export default function DetailsScreen() {
   const [locationLoading, setLocationLoading] = useState(false);
 
   const attraction = attractions.find((a) => a.id === id);
-
-  useEffect(() => {
-    checkFavorite();
-  }, []);
-
-  const checkFavorite = async () => {
-    try {
-      const saved = await AsyncStorage.getItem("favorites");
-      if (saved) {
-        const favs = JSON.parse(saved);
-        setIsFavorite(favs.includes(id));
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const toggleFavorite = async () => {
-    try {
-      const saved = await AsyncStorage.getItem("favorites");
-      let favs = saved ? JSON.parse(saved) : [];
-      if (isFavorite) {
-        favs = favs.filter((f: string) => f !== id);
-        setIsFavorite(false);
-      } else {
-        favs.push(id);
-        setIsFavorite(true);
-      }
-      await AsyncStorage.setItem("favorites", JSON.stringify(favs));
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   const openMaps = () => {
     if (!attraction) return;
