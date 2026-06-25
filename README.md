@@ -12,7 +12,7 @@ LankaTrails is a localized travel companion app designed to help tourists explor
 
 ## ✨ Features
 
-### Core Features (Track B)
+### Core Features
 
 - 🏛️ Browse attractions filtered by category (Historical, Nature, Hotels)
 - 🔍 Search attractions by name or location
@@ -73,41 +73,41 @@ LankaTrails/
 
 ├── app/
 
-│   ├── (tabs)/
+│ ├── (tabs)/
 
-│   │   ├── _layout.tsx      # Bottom Tab Navigation
+│ │ ├── \_layout.tsx # Bottom Tab Navigation
 
-│   │   ├── index.tsx        # Home Screen
+│ │ ├── index.tsx # Home Screen
 
-│   │   ├── attractions.tsx  # Attractions List + Filter + Search
+│ │ ├── attractions.tsx # Attractions List + Filter + Search
 
-│   │   └── favorites.tsx    # Favorites Screen
+│ │ └── favorites.tsx # Favorites Screen
 
-│   ├── _layout.tsx          # Root Layout
+│ ├── \_layout.tsx # Root Layout
 
-│   ├── details.tsx          # Attraction Detail + GPS + Distance
+│ ├── details.tsx # Attraction Detail + GPS + Distance
 
-│   ├── about.tsx            # About Screen
+│ ├── about.tsx # About Screen
 
-│   ├── onboarding.tsx       # Onboarding Slides
+│ ├── onboarding.tsx # Onboarding Slides
 
-│   └── index.tsx            # Redirect to Onboarding
+│ └── index.tsx # Redirect to Onboarding
 
 ├── components/
 
-│   └── Footer.tsx
+│ └── Footer.tsx
 
 ├── constants/
 
-│   └── colors.js
+│ └── colors.js
 
 ├── data/
 
-│   └── attractions.js       # Sri Lanka attractions data
+│ └── attractions.js # Sri Lanka attractions data
 
 └── assets/
 
-└── images/              # Local attraction images
+└── images/ # Local attraction images
 
 ---
 
@@ -141,6 +141,27 @@ npx expo start --tunnel
 ```
 
 4. Scan the QR code with **Expo Go** app on your device
+
+---
+
+---
+
+## 📲 APK Download
+
+A standalone Android APK build of LankaTrails is available for installation on physical Android devices.
+
+### Download APK
+
+https://expo.dev/accounts/vneth/projects/LankaTrails/builds/eb9539d0-4631-46b5-87f9-aed5c043bb7d
+
+### Installation Instructions
+
+1. Open the APK download link on your Android device.
+2. Download the APK file.
+3. Allow installation from unknown sources if prompted.
+4. Install and launch the application.
+
+> Note: The APK was built using Expo EAS Build and tested on a physical Android device.
 
 ---
 

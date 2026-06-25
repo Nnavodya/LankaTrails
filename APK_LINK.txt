@@ -1,0 +1,18 @@
+LankaTrails APK Download Link
+
+Expo EAS Build:
+
+https://expo.dev/accounts/vneth/projects/LankaTrails/builds/eb9539d0-4631-46b5-87f9-aed5c043bb7d
+
+Installation:
+
+1. Open the link on an Android device.
+2. Download the APK.
+3. Allow installation from unknown sources.
+4. Install and launch LankaTrails.
+
+Developer:
+Nethmi Navodya
+University of Kelaniya
+Faculty of Science
+BSc Honours in Software Engineering
