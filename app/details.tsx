@@ -12,12 +12,14 @@ import {
   View,
 } from "react-native";
 import { Colors } from "../constants/colors";
+import { useFavorites } from "../contexts/FavoritesContext";
 import { attractions } from "../data/attractions";
 
 export default function DetailsScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { isFavorite: checkIsFavorite, toggleFavorite } = useFavorites();
+  const isFavorite = attraction ? checkIsFavorite(attraction.id) : false;
   const [distance, setDistance] = useState<string | null>(null);
   const [locationLoading, setLocationLoading] = useState(false);
 
