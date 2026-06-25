@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Linking from "expo-linking";
 import * as Location from "expo-location";
 import { useLocalSearchParams, useRouter } from "expo-router";
