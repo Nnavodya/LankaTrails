@@ -19,11 +19,11 @@ export default function DetailsScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
   const { isFavorite: checkIsFavorite, toggleFavorite } = useFavorites();
-  const isFavorite = attraction ? checkIsFavorite(attraction.id) : false;
   const [distance, setDistance] = useState<string | null>(null);
   const [locationLoading, setLocationLoading] = useState(false);
 
   const attraction = attractions.find((a) => a.id === id);
+  const isFavorite = attraction ? checkIsFavorite(attraction.id) : false;
 
   const openMaps = () => {
     if (!attraction) return;
@@ -88,7 +88,10 @@ export default function DetailsScreen() {
       <View style={styles.content}>
         <View style={styles.titleRow}>
           <Text style={styles.name}>{attraction.name}</Text>
-          <TouchableOpacity onPress={toggleFavorite} style={styles.favBtn}>
+          <TouchableOpacity
+            onPress={() => toggleFavorite(attraction.id)}
+            style={styles.favBtn}
+          >
             <Text style={styles.favIcon}>{isFavorite ? "❤️" : "🤍"}</Text>
           </TouchableOpacity>
         </View>
@@ -136,7 +139,7 @@ export default function DetailsScreen() {
 
         <TouchableOpacity
           style={[styles.favoriteBtn, isFavorite && styles.favoriteBtnActive]}
-          onPress={toggleFavorite}
+          onPress={() => toggleFavorite(attraction.id)}
         >
           <Text
             style={[
