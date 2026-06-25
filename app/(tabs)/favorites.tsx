@@ -1,6 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useFocusEffect, useRouter } from "expo-router";
-import { useCallback, useState } from "react";
+import { useRouter } from "expo-router";
+import { useState } from "react";
 import {
   Alert,
   FlatList,
@@ -11,56 +10,22 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
 import { Colors } from "../../constants/colors";
+import { useFavorites } from "../../contexts/FavoritesContext";
 import { attractions } from "../../data/attractions";
-
-interface Attraction {
-  id: string;
-  name: string;
-  image: any;
-  location: string;
-  category: string;
-  rating: number;
-  description: string;
-  latitude: number;
-  longitude: number;
-}
 
 export default function FavoritesScreen() {
   const router = useRouter();
-  const [favoriteAttractions, setFavoriteAttractions] = useState<Attraction[]>(
-    [],
-  );
+  const { favorites, toggleFavorite } = useFavorites();
   const [refreshing, setRefreshing] = useState(false);
 
-  useFocusEffect(
-    useCallback(() => {
-      loadFavorites();
-    }, []),
-  );
+  const favoriteAttractions = attractions
+    .filter((a) => favorites.includes(a.id))
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   const onRefresh = async () => {
     setRefreshing(true);
-    await loadFavorites();
-    setRefreshing(false);
-  };
-
-  const loadFavorites = async () => {
-    try {
-      const saved = await AsyncStorage.getItem("favorites");
-      if (saved) {
-        const favIds = JSON.parse(saved);
-        const favList = attractions
-          .filter((a) => favIds.includes(a.id))
-          .sort((a, b) => a.name.localeCompare(b.name));
-        setFavoriteAttractions(favList as Attraction[]);
-      } else {
-        setFavoriteAttractions([]);
-      }
-    } catch (e) {
-      console.log(e);
-    }
+    setTimeout(() => setRefreshing(false), 500);
   };
 
   const confirmRemove = (id: string) => {
@@ -72,22 +37,10 @@ export default function FavoritesScreen() {
         {
           text: "Remove",
           style: "destructive",
-          onPress: () => removeFavorite(id),
+          onPress: () => toggleFavorite(id),
         },
       ],
     );
-  };
-
-  const removeFavorite = async (id: string) => {
-    try {
-      const saved = await AsyncStorage.getItem("favorites");
-      let favs = saved ? JSON.parse(saved) : [];
-      favs = favs.filter((f: string) => f !== id);
-      await AsyncStorage.setItem("favorites", JSON.stringify(favs));
-      setFavoriteAttractions((prev) => prev.filter((a) => a.id !== id));
-    } catch (e) {
-      console.log(e);
-    }
   };
 
   return (
