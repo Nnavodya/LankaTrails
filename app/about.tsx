@@ -74,7 +74,7 @@ export default function AboutScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F7FA", // light gray background
+    backgroundColor: "#F5F7FA", 
   },
   header: {
     backgroundColor: Colors.tabBar,
