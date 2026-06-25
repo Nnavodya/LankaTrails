@@ -34,13 +34,17 @@ export default function AttractionsScreen() {
     }
   }, [category]);
 
+  const trimmedQuery = searchQuery.trim();
+  const isValidSearch = trimmedQuery.length === 0 || trimmedQuery.length >= 2;
+
   const filteredAttractions = attractions.filter((a) => {
     const matchCategory =
       selectedCategory === "All" || a.category === selectedCategory;
     const matchSearch =
-      a.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      a.location.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchCategory && matchSearch;
+      trimmedQuery.length === 0 ||
+      a.name.toLowerCase().includes(trimmedQuery.toLowerCase()) ||
+      a.location.toLowerCase().includes(trimmedQuery.toLowerCase());
+    return matchCategory && matchSearch && isValidSearch;
   });
 
   return (
@@ -99,6 +103,16 @@ export default function AttractionsScreen() {
           returnKeyType="search"
           clearButtonMode="while-editing"
         />
+        {searchQuery.length > 0 && searchQuery.trim().length < 2 && (
+          <Text style={styles.validationText}>
+            ⚠️ Type at least 2 characters to search
+          </Text>
+        )}
+        {searchQuery.length === 50 && (
+          <Text style={styles.validationText}>
+            ⚠️ Maximum 50 characters reached
+          </Text>
+        )}
       </View>
 
       {/* Attractions List */}
@@ -239,6 +253,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderBottomWidth: 1,
     borderBottomColor: Colors.lightGray,
+  },
+  validationText: {
+    fontSize: 12,
+    color: Colors.danger,
+    marginTop: 6,
+    marginLeft: 4,
   },
   searchInput: {
     backgroundColor: Colors.background,
